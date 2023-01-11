@@ -10,25 +10,8 @@ export default function PopupWithForm(props) {
         <div className="popup__container">
           <div className="popup__content">
             <h2 className="popup__title">{props.title}</h2>
-            <form name="profile-form" className="popup__form" noValidate="">
-              <input
-                type="text"
-                name="name"
-                id="popup_input_profile"
-                placeholder="Имя"
-                required
-                className="popup__input popup__input_form_name"
-              />
-              <span className="popup__error" id="name-input-error"></span>
-              <input
-                type="text"
-                name="about"
-                id="popup_input_job"
-                placeholder="О Себе"
-                required
-                className="popup__input popup__input_form_job"
-              />
-              <span className="popup__error" id="job-input-error"></span>
+            <form name="profile-form" className="popup__form">
+              {props.children}
               <button
                 aria-label="Сохранить"
                 className="popup__button"
