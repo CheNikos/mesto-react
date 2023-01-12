@@ -1,4 +1,4 @@
-export default function Сard(props) {
+export default function Card(props) {
   function handleClick() {
     props.onCardClick(props.card);
   }
