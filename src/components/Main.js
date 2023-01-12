@@ -1,14 +1,14 @@
-import React from "react";
+import { useEffect, useState } from "react";
 import api from "../utils/api.js";
 import Card from "./Card.js";
 
 export default function Main(props) {
-  const [userName, setUserName] = React.useState([]);
-  const [userDescription, setUserDescription] = React.useState([]);
-  const [userAvatar, setUserAvatar] = React.useState([]);
-  const [cards, setCards] = React.useState([]);
+  const [userName, setUserName] = useState([]);
+  const [userDescription, setUserDescription] = useState([]);
+  const [userAvatar, setUserAvatar] = useState([]);
+  const [cards, setCards] = useState([]);
 
-  React.useEffect(() => {
+  useEffect(() => {
     Promise.all([api.getUserInfo(), api.getInitialCards()])
       .then(([data, initialCards]) => {
         setUserName(data.name);
@@ -19,7 +19,7 @@ export default function Main(props) {
       .catch((err) => {
         console.log(`Ошибка: ${err}`);
       });
-  }, [setUserName, setUserDescription, setUserAvatar, setCards]);
+  }, []);
 
   return (
     <main>
@@ -28,7 +28,7 @@ export default function Main(props) {
           <img
             src={userAvatar}
             className="profile__avatar"
-            alt="Фото профиля"
+            alt="Аватар"
             name="avatar"
             onClick={props.onEditAvatar}
           />
@@ -52,14 +52,14 @@ export default function Main(props) {
       </section>
 
       <section aria-label="Элементы" className="elements">
-        {cards.map((object) => {
+        {cards.map((card, id) => {
           return (
             <Card
-              key={object}
-              card={object}
-              nameCard={object.name}
-              linkCard={object.link}
-              likesCard={object.likes}
+              key={id}
+              card={card}
+              nameCard={card.name}
+              linkCard={card.link}
+              likesCard={card.likes}
               onCardClick={props.onCardClick}
             />
           );

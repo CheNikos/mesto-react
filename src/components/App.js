@@ -1,6 +1,6 @@
 import Header from "./Header.js";
 import Main from "./Main.js";
-import PopUpWithForm from "./PopUpWithForm";
+import PopupWithForm from "./PopupWithForm";
 import ImagePopup from "./ImagePopup.js";
 import Footer from "./Footer.js";
 import { useState } from "react";
@@ -15,7 +15,6 @@ const editProfileChildren = (
       required
       className="popup__input popup__input_form_name"
     />
-    <span className="popup__error" id="name-input-error"></span>
     <input
       type="text"
       name="about"
@@ -24,7 +23,6 @@ const editProfileChildren = (
       required
       className="popup__input popup__input_form_job"
     />
-    <span className="popup__error" id="job-input-error"></span>
   </>
 );
 
@@ -37,7 +35,6 @@ const editAddPlaceChildren = (
       placeholder="Название"
       className="popup__input popup__input_card_name"
     />
-    <span className="popup__error" id="card-input-error"></span>
     <input
       type="url"
       required
@@ -45,7 +42,6 @@ const editAddPlaceChildren = (
       placeholder="Ссылка на картинку"
       className="popup__input popup__input_card_link"
     />
-    <span className="popup__error" id="link-input-error"></span>
   </>
 );
 
@@ -58,7 +54,6 @@ const editAvatarChildren = (
       placeholder="Ссылка на картинку"
       className="popup__input popup__input_card_avatar"
     />
-    <span className="popup__error" id="avatar-input-error"></span>
   </>
 );
 
@@ -102,21 +97,21 @@ function App() {
         onEditAvatar={handleChangeAvatarClick}
         onCardClick={handleCardClick}
       />
-      <PopUpWithForm
+      <PopupWithForm
         name="profile-edit"
         title="Редактировать профиль"
         children={editProfileChildren}
         isOpen={isEditProfilePopupOpen}
         onClose={closeAllPopups}
       />
-      <PopUpWithForm
+      <PopupWithForm
         name="create-card"
         title="Новое место"
         children={editAddPlaceChildren}
         isOpen={isAddPlacePopupOpen}
         onClose={closeAllPopups}
       />
-      <PopUpWithForm
+      <PopupWithForm
         name="avatar"
         title="Обновить аватар"
         isOpen={isEditAvatarPopupOpen}
