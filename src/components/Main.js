@@ -52,10 +52,10 @@ export default function Main(props) {
       </section>
 
       <section aria-label="Элементы" className="elements">
-        {cards.map((card, id) => {
+        {cards.map((card, _id) => {
           return (
             <Card
-              key={id}
+              key={_id}
               card={card}
               nameCard={card.name}
               linkCard={card.link}

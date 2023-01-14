@@ -1,18 +1,18 @@
-export default function ImagePopup(props) {
+export default function ImagePopup({card, linkCard, onClose}) {
   return (
-    <section className={`${props.card ? `popup popup_opened` : `popup`}`}>
+    <section className={`${card ? `popup popup_opened` : `popup`}`}>
       <div className="popup__container popup__container_zoom">
       <button
           className="popup__close popup__close_zoom"
           type="button"
-          onClick={props.onClose}
+          onClick={onClose}
         />
         <img
           className="popup__zoom-image"
-          src={`${props.linkCard.link}`}
-          alt={props.linkCard.name}
+          src={`${linkCard.link}`}
+          alt={linkCard.name}
         />
-        <h2 className="popup__name-zoom">{props.linkCard.name}</h2>
+        <h2 className="popup__name-zoom">{linkCard.name}</h2>
       </div>
     </section>
   );
