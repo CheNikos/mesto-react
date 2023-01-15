@@ -3,9 +3,9 @@ import api from "../utils/api.js";
 import Card from "./Card.js";
 
 export default function Main(props) {
-  const [userName, setUserName] = useState(['']);
-  const [userDescription, setUserDescription] = useState(['']);
-  const [userAvatar, setUserAvatar] = useState([null]);
+  const [userName, setUserName] = useState('');
+  const [userDescription, setUserDescription] = useState('');
+  const [userAvatar, setUserAvatar] = useState(null);
   const [cards, setCards] = useState([]);
 
   useEffect(() => {
@@ -52,10 +52,10 @@ export default function Main(props) {
       </section>
 
       <section aria-label="Элементы" className="elements">
-        {cards.map((card, _id) => {
+        {cards.map((card) => {
           return (
             <Card
-              key={_id}
+              key={card._id}
               card={card}
               nameCard={card.name}
               linkCard={card.link}
