@@ -3,7 +3,9 @@ import Main from "./Main.js";
 import PopupWithForm from "./PopupWithForm";
 import ImagePopup from "./ImagePopup.js";
 import Footer from "./Footer.js";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import api from "../utils/api.js"
+import { CurrentUserContext } from "../contexts/CurrentUserContext.js"
 
 const editProfileChildren = (
   <>
@@ -63,6 +65,17 @@ function App() {
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = useState(false);
   const [selectedCard, setSelectedCard] = useState(false);
   const [linkImg, setLinkImg] = useState([]);
+  const [currentUser, setCurrentUser] = useState({})
+
+  useEffect(() => {
+    Promise.all([api.getUserInfo()])
+      .then(([userData]) => {
+        setCurrentUser(userData)
+      })
+      .catch((err) => {
+        console.log(`Ошибка: ${err}`);
+      })
+  }, [setCurrentUser])
 
   function handleEditProfileClick() {
     setIsEditProfilePopupOpen(true);
@@ -89,6 +102,7 @@ function App() {
   }
 
   return (
+    <CurrentUserContext.Provider value={currentUser}>
     <div>
       <Header />
       <Main
@@ -125,6 +139,7 @@ function App() {
       />
       <Footer />
     </div>
+    </CurrentUserContext.Provider>
   );
 }
 
