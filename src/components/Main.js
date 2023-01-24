@@ -1,9 +1,9 @@
 import { useContext } from "react";
-// import Card from "./Card.js";
+import Card from "./Card.js";
 import { CurrentUserContext } from "../contexts/CurrentUserContext.js";
 
 export default function Main(props) {
-  const currentUser = useContext(CurrentUserContext)
+  const currentUser = useContext(CurrentUserContext);
 
   return (
     <main>
@@ -35,20 +35,27 @@ export default function Main(props) {
         ></button>
       </section>
 
-      {/* <section aria-label="Элементы" className="elements">
-        {cards.map((card) => {
+      <section aria-label="Элементы" className="elements">
+        {props.cards.map((card) => {
+          const isOwn = card.owner._id === currentUser._id;
+          const isLiked = card.likes.some((i) => i._id === currentUser._id);
+          const cardLikeButtonClassName = `element__like ${
+            isLiked && "element__like_active"
+          }`;
+
           return (
             <Card
               key={card._id}
               card={card}
-              nameCard={card.name}
-              linkCard={card.link}
-              likesCard={card.likes}
+              isOwn={isOwn}
+              likes={cardLikeButtonClassName}
               onCardClick={props.onCardClick}
+              onCardLike={props.onCardLike}
+              onCardDelete={props.onCardDelete}
             />
           );
         })}
-      </section> */}
+      </section>
     </main>
   );
 }
