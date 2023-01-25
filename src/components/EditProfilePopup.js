@@ -44,7 +44,7 @@ export default function EditProfilePopup(props) {
           placeholder="Имя"
           required
           className="popup__input"
-          value={name || ''}
+          value={name || ""}
           onChange={handleNameChange}
         />
         <input
@@ -54,7 +54,7 @@ export default function EditProfilePopup(props) {
           placeholder="О Себе"
           required
           className="popup__input"
-          value={description || ''}
+          value={description || ""}
           onChange={handleDescriptionChange}
         />
       </PopupWithForm>

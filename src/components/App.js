@@ -9,27 +9,6 @@ import { CurrentUserContext } from "../contexts/CurrentUserContext.js";
 import { ArrayCardsContext } from "../contexts/ArrayCardsContext.js";
 import EditProfilePopup from "./EditProfilePopup.js";
 
-// const editProfileChildren = (
-//   <>
-//     <input
-//       type="text"
-//       name="name"
-//       id="popup_input_profile"
-//       placeholder="Имя"
-//       required
-//       className="popup__input popup__input_form_name"
-//     />
-//     <input
-//       type="text"
-//       name="about"
-//       id="popup_input_job"
-//       placeholder="О Себе"
-//       required
-//       className="popup__input popup__input_form_job"
-//     />
-//   </>
-// );
-
 const editAddPlaceChildren = (
   <>
     <input
