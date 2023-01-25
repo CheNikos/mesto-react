@@ -9,7 +9,7 @@ export default function PopupWithForm(props) {
         <div className="popup__container">
           <div className="popup__content">
             <h2 className="popup__title">{props.title}</h2>
-            <form name="profile-form" className="popup__form">
+            <form className="popup__form" onSubmit={props.onSubmit}>
               {props.children}
               <button
                 aria-label="Сохранить"

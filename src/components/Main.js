@@ -18,14 +18,18 @@ export default function Main(props) {
           />
         </div>
         <div className="profile__info">
-          <h1 className="profile__title">{currentUser.name}</h1>
+          <h1 className="profile__title" name="name">
+            {currentUser.name}
+          </h1>
           <button
             aria-label="Редактировать"
             className="profile__edit-button"
             type="button"
             onClick={props.onEditProfile}
           ></button>
-          <p className="profile__subtitle">{currentUser.about}</p>
+          <p className="profile__subtitle" name="about">
+            {currentUser.about}
+          </p>
         </div>
         <button
           aria-label="Добавить"

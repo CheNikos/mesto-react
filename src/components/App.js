@@ -7,27 +7,28 @@ import { useState, useEffect } from "react";
 import api from "../utils/api.js";
 import { CurrentUserContext } from "../contexts/CurrentUserContext.js";
 import { ArrayCardsContext } from "../contexts/ArrayCardsContext.js";
+import EditProfilePopup from "./EditProfilePopup.js";
 
-const editProfileChildren = (
-  <>
-    <input
-      type="text"
-      name="name"
-      id="popup_input_profile"
-      placeholder="Имя"
-      required
-      className="popup__input popup__input_form_name"
-    />
-    <input
-      type="text"
-      name="about"
-      id="popup_input_job"
-      placeholder="О Себе"
-      required
-      className="popup__input popup__input_form_job"
-    />
-  </>
-);
+// const editProfileChildren = (
+//   <>
+//     <input
+//       type="text"
+//       name="name"
+//       id="popup_input_profile"
+//       placeholder="Имя"
+//       required
+//       className="popup__input popup__input_form_name"
+//     />
+//     <input
+//       type="text"
+//       name="about"
+//       id="popup_input_job"
+//       placeholder="О Себе"
+//       required
+//       className="popup__input popup__input_form_job"
+//     />
+//   </>
+// );
 
 const editAddPlaceChildren = (
   <>
@@ -117,6 +118,13 @@ function App() {
     setSelectedCard(false);
   }
 
+  function handleUpdateUser({ name, about }) {
+    api.updateUserInfo({ name, about }).then((newUserInfo) => {
+      setCurrentUser(newUserInfo);
+      closeAllPopups();
+    });
+  }
+
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <ArrayCardsContext.Provider value={cards}>
@@ -131,12 +139,12 @@ function App() {
             onCardLike={handleCardLike}
             onCardDelete={handleCardDelete}
           />
-          <PopupWithForm
-            name="profile-edit"
-            title="Редактировать профиль"
-            children={editProfileChildren}
+          <EditProfilePopup
             isOpen={isEditProfilePopupOpen}
             onClose={closeAllPopups}
+            onUpdateUser={handleUpdateUser}
+            name={currentUser.name}
+            description={currentUser.about}
           />
           <PopupWithForm
             name="create-card"
