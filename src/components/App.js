@@ -8,6 +8,7 @@ import api from "../utils/api.js";
 import { CurrentUserContext } from "../contexts/CurrentUserContext.js";
 import { ArrayCardsContext } from "../contexts/ArrayCardsContext.js";
 import EditProfilePopup from "./EditProfilePopup.js";
+import EditAvatarPopup from "./EditAvatarPopup";
 
 const editAddPlaceChildren = (
   <>
@@ -24,18 +25,6 @@ const editAddPlaceChildren = (
       name="link"
       placeholder="Ссылка на картинку"
       className="popup__input popup__input_card_link"
-    />
-  </>
-);
-
-const editAvatarChildren = (
-  <>
-    <input
-      type="url"
-      required
-      name="avatar"
-      placeholder="Ссылка на картинку"
-      className="popup__input popup__input_card_avatar"
     />
   </>
 );
@@ -104,6 +93,18 @@ function App() {
     });
   }
 
+  function handleUpdateAvatar({ avatar }) {
+    api
+      .editAvatar({ avatar })
+      .then((newUserAvatar) => {
+        setCurrentUser(newUserAvatar);
+        closeAllPopups();
+      })
+      .catch((err) => {
+        console.log(`Ошибка: ${err}`);
+      });
+  }
+
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <ArrayCardsContext.Provider value={cards}>
@@ -125,19 +126,17 @@ function App() {
             name={currentUser.name}
             description={currentUser.about}
           />
+          <EditAvatarPopup
+            isOpen={isEditAvatarPopupOpen}
+            onClose={closeAllPopups}
+            onUpdateAvatar={handleUpdateAvatar}
+          />
           <PopupWithForm
             name="create-card"
             title="Новое место"
             children={editAddPlaceChildren}
             isOpen={isAddPlacePopupOpen}
             onClose={closeAllPopups}
-          />
-          <PopupWithForm
-            name="avatar"
-            title="Обновить аватар"
-            isOpen={isEditAvatarPopupOpen}
-            onClose={closeAllPopups}
-            children={editAvatarChildren}
           />
           <ImagePopup
             card={selectedCard}
