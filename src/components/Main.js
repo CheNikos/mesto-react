@@ -43,16 +43,14 @@ export default function Main(props) {
         {props.cards.map((card) => {
           const isOwn = card.owner._id === currentUser._id;
           const isLiked = card.likes.some((i) => i._id === currentUser._id);
-          const cardLikeButtonClassName = `element__like ${
-            isLiked && "element__like_active"
-          }`;
+          const cardLike = `element__like ${isLiked && "element__like_active"}`;
 
           return (
             <Card
               key={card._id}
               card={card}
               isOwn={isOwn}
-              likes={cardLikeButtonClassName}
+              likes={cardLike}
               onCardClick={props.onCardClick}
               onCardLike={props.onCardLike}
               onCardDelete={props.onCardDelete}

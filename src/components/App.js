@@ -1,6 +1,5 @@
 import Header from "./Header.js";
 import Main from "./Main.js";
-import PopupWithForm from "./PopupWithForm";
 import ImagePopup from "./ImagePopup.js";
 import Footer from "./Footer.js";
 import { useState, useEffect } from "react";
@@ -9,25 +8,7 @@ import { CurrentUserContext } from "../contexts/CurrentUserContext.js";
 import { ArrayCardsContext } from "../contexts/ArrayCardsContext.js";
 import EditProfilePopup from "./EditProfilePopup.js";
 import EditAvatarPopup from "./EditAvatarPopup";
-
-const editAddPlaceChildren = (
-  <>
-    <input
-      type="text"
-      required
-      name="name"
-      placeholder="Название"
-      className="popup__input popup__input_card_name"
-    />
-    <input
-      type="url"
-      required
-      name="link"
-      placeholder="Ссылка на картинку"
-      className="popup__input popup__input_card_link"
-    />
-  </>
-);
+import AddPlacePopup from "./AddPlacePopup";
 
 function App() {
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = useState(false);
@@ -105,6 +86,18 @@ function App() {
       });
   }
 
+  function handleAddPlaceSubmit({ name, link }) {
+    api
+      .addNewCard({ name, link })
+      .then((newCard) => {
+        setCards([newCard, ...cards]);
+        closeAllPopups();
+      })
+      .catch((err) => {
+        console.log(`Ошибка: ${err}`);
+      });
+  }
+
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <ArrayCardsContext.Provider value={cards}>
@@ -131,12 +124,10 @@ function App() {
             onClose={closeAllPopups}
             onUpdateAvatar={handleUpdateAvatar}
           />
-          <PopupWithForm
-            name="create-card"
-            title="Новое место"
-            children={editAddPlaceChildren}
+          <AddPlacePopup
             isOpen={isAddPlacePopupOpen}
             onClose={closeAllPopups}
+            onAddCard={handleAddPlaceSubmit}
           />
           <ImagePopup
             card={selectedCard}
