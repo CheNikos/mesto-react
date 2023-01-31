@@ -1,7 +1,10 @@
 export default function Footer() {
+  let today = new Date();
+  let year = today.getFullYear();
+
   return (
     <footer className="footer">
-      <p className="footer__copyright">&copy;2022. Николай Пархариди</p>
+      <p className="footer__copyright">&copy;{year} Николай Пархариди</p>
     </footer>
   );
 }
